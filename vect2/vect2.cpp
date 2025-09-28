@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect2.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvoisin <mvoisin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 20:39:15 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/08/01 21:14:24 by fatkeski         ###   ########.fr       */
+/*   Updated: 2025/09/28 15:14:08 by mvoisin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ vect2& vect2::operator*=(const vect2& obj)
 	this->y *= obj.y;
 	return(*this);
 }
+
 
 vect2 vect2::operator+(const vect2& obj) const
 {
