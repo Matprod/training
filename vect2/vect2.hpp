@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect2.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:20:54 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/08/01 21:14:17 by fatkeski         ###   ########.fr       */
+/*   Updated: 2025/10/01 23:29:53 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class vect2
 
 		vect2 operator-() const;
 		vect2 operator*(int num) const;
+		vect2 operator+(int num) const;
 
 		vect2& operator*=(int num);
 

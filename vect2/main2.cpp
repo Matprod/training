@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main2.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvoisin <mvoisin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:04:35 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/09/28 15:16:38 by mvoisin          ###   ########.fr       */
+/*   Updated: 2025/10/01 23:40:10 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vect2.hpp"
+#include "vect22.hpp"
 
 int main()
 {
 	vect2 v1; // 0, 0
 	vect2 v2(1, 2); // 1, 2
+	std::cout << "test" << std::endl;
 	const vect2 v3(v2); // 1, 2
 	vect2 v4 = v2; // 1, 2
 

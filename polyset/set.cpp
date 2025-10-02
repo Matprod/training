@@ -1,59 +1,63 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set.cpp                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 15:12:59 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/07/28 16:13:27 by fatkeski         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "set.hpp"
-#include "searchable_array_bag.hpp"
 
-set::set(searchable_bag& s_bag) : bag(s_bag)
+set::set() : bag_(0) {};
+
+set::set(searchable_bag &backend) : bag_(&backend) {};
+
+set::set(const set &copy) : bag_(copy.bag_) {};
+
+set &set::operator=(const set &other)
 {
+    if (this != &other)
+    {
+        this->bag_ = other.bag_;
+    }
 
+    return *this;
 }
 
-bool set::has(int value) const
-{
-	return(bag.has(value));
-}
+set::~set() {};
 
-void set::insert (int value)
+bool set::has(int x) const
 {
-	if(!(this->has(value)))
-		bag.insert(value);
-}
+    if (this->bag_ == 0)
+        return false;
 
-void set::insert (int *data, int size)
+    return this->bag_->has(x);
+};
+
+void set::insert(int x)
 {
-	for(int i = 0; i < size; i++)
-	{
-		this->insert(data[i]);
-	}
+    if (this->bag_ == 0)
+        return;
+
+    if (!this->bag_->has(x))
+        this->bag_->insert(x);
+};
+
+void set::insert(int *array, int n)
+{
+    if (this->bag_ == 0 || n <= 0 || array == 0)
+        return;
+
+    int i = 0;
+    while (i < n)
+    {
+        this->insert(array[i]);
+        i++;
+    }
 }
 
 void set::print() const
 {
-	bag.print();
+    if (this->bag_ == 0)
+        return;
+    this->bag_->print();
 }
 
 void set::clear()
 {
-	bag.clear();
-}
-
-const searchable_bag& set::get_bag()
-{
-	return(this->bag);
-}
-
-
-set::~set()
-{
-
+    if (this->bag_ == 0)
+        return;
+    this->bag_->clear();
 }

@@ -147,8 +147,6 @@ char	**one_iteration(char **array, int width, int height)
 					new_board[i][j] = '0';
 				}
 			}
-			//printf("print iteration of j = %d\n i = %d\n", j, i);
-			//print_board(new_board);
 			j++;
 		}
 		j = 0;
@@ -159,24 +157,16 @@ char	**one_iteration(char **array, int width, int height)
 void simulation(char **array, int width, int height, int iterations)
 {
 	char **new_board;
-	printf("BASE PATTERN\n");
-	print_board(array);
 	if (iterations == 0)
 	{
-
 		return ;
 	}
 	while(iterations--)
 	{
-		printf("_______________________________________________\n");
 		new_board = one_iteration(array, width, height);
 		array = new_board;
 		print_board(new_board);
-		usleep(200000);
-		printf("_______________________________________________\n");
 	}
-	printf("FINAL PRINT\n");
-	print_board(new_board);
 	free_array(new_board);
 }
 

@@ -6,7 +6,7 @@ NAME = vec
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CFLAGS) -o $(NAME) vect22.cpp main.cpp
+	g++ -Wall -Wextra -Werror -std=c++11 -o $(NAME) vect22.cpp main2.cpp
 
 clean:
 	rm -f $(NAME)
