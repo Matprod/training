@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect2.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: mvoisin <mvoisin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 20:39:15 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/10/01 23:29:21 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/10/02 12:14:36 by mvoisin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,6 @@ vect2& vect2::operator*=(const vect2& obj)
 	return(*this);
 }
 
-
-vect2 vect2::operator+(const vect2& obj) const
-{
-	vect2 temp = *this;
-
-	temp.x += obj.x;
-	temp.y += obj.y;
-	return(temp);
-}
-
 vect2 vect2::operator-(const vect2& obj) const
 {
 	vect2 temp = *this;
@@ -131,6 +121,13 @@ vect2 vect2::operator*(const vect2& obj) const
 	vect2 temp = *this;
 	temp.x *= obj.x;
 	temp.y *= obj.y;
+	return(temp);
+}
+
+vect2 operator*(int num, const vect2& obj)
+{
+	vect2 temp(obj);
+	temp *= num;
 	return(temp);
 }
 

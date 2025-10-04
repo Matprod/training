@@ -48,5 +48,6 @@ class bigint
 		bool operator>(const bigint& other) const;
 		bool operator<=(const bigint& other) const;
 		bool operator>=(const bigint& other) const;
+		//
 };
 std::ostream& operator<<(std::ostream& output, const bigint& obj);

@@ -1,12 +1,12 @@
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++11 -g
-NAME = big
+NAME = polyset
 
 
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(CFLAGS) -o $(NAME) bigint.cpp main.cpp
+	$(CC) $(CFLAGS) -o $(NAME) array_bag.cpp searchable_array_bag.cpp searchable_tree_bag.cpp tree_bag.cpp set.cpp main.cpp
 
 clean:
 	rm -f $(NAME)

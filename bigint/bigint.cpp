@@ -133,6 +133,7 @@ bigint bigint::operator<<(unsigned int n)const
 {
 	bigint temp = *this;
 	temp.str.insert(temp.str.end(), n, '0');
+	return (temp);
 }
 
 bigint bigint::operator>>(unsigned int n)const
@@ -147,6 +148,7 @@ bigint bigint::operator>>(unsigned int n)const
 	{
 		temp.str.erase(length-n, n);
 	}
+	return temp;
 }
 
 bigint& bigint::operator<<=(unsigned int n)
@@ -165,7 +167,8 @@ bigint& bigint::operator>>=(unsigned int n)
 
 unsigned int stringToUINT(std::string str)
 {
-	std::stringstream ss(str);
+	std::stringstream ss;
+	ss << str;
 	unsigned int res;
 
 	ss >> res;

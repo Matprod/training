@@ -1,88 +1,56 @@
-#include "searchable_array_bag.hpp"
+#include "searchable_bag.hpp"
 #include "searchable_tree_bag.hpp"
+#include "searchable_array_bag.hpp"
 #include "set.hpp"
+
+
 #include <iostream>
 
-static void print_bool_line(const char *label, bool v, bool expected)
+int main(int argc, char **argv)
 {
-  std::cout << label << ": ";
-  if (v)
-  {
-    std::cout << "true";
-  }
-  else
-  {
-    std::cout << "false";
-  }
-  std::cout << " | ";
-  if (expected)
-  {
-    std::cout << "true";
-  }
-  else
-  {
-    std::cout << "false";
-  }
-  std::cout << std::endl;
-}
+	if (argc == 1)
+		return 1;
+	searchable_bag *t = new searchable_tree_bag;
+	searchable_bag *a = new searchable_array_bag;
 
-int main()
-{
-  // --- 1) Reference-ctor with array backend
-  searchable_array_bag ab;
-  set s_ref(ab); // reference constructor
+	for (int i = 1; i < argc; i++) {
+		t->insert(atoi(argv[i]));
+		a->insert(atoi(argv[i]));
+	}
+	t->print();
+	a->print();
 
-  s_ref.insert(1);
-  s_ref.insert(1); // duplicate ignored
-  s_ref.insert(2);
-  s_ref.insert(2); // duplicate ignored
-  s_ref.insert(3);
+	for (int i = 1; i < argc; i++)
+	{
+		std::cout << t->has(atoi(argv[i])) << std::endl;
+		std::cout << a->has(atoi(argv[i])) << std::endl;
+		std::cout << t->has(atoi(argv[i]) - 1) << std::endl;
+		std::cout << a->has(atoi(argv[i]) - 1) << std::endl;
+	}
 
-  print_bool_line("ref_arr_has_1", s_ref.has(1), true);
-  print_bool_line("ref_arr_has_2", s_ref.has(2), true);
-  print_bool_line("ref_arr_has_3", s_ref.has(3), true);
-  print_bool_line("ref_arr_has_9", s_ref.has(9), false);
+	t->clear();
+	a->clear();
 
-  // Optional: show underlying contents (order depends on array_bag)
-  std::cout << "ref_arr_print (no duplicates expected):" << std::endl;
-  s_ref.print();
+	const searchable_array_bag tmp(static_cast<searchable_array_bag &>(*a));
+	tmp.print();
+	tmp.has(1);
 
-  s_ref.clear();
-  print_bool_line("ref_arr_after_clear_has_1", s_ref.has(1), false);
+	set sa(*a);
+	set st(*t);
+	for (int i = 1; i < argc; i++)
+	{
+		st.insert(atoi(argv[i]));
+		sa.insert(atoi(argv[i]));
 
-  // --- 2) Pointer-ctor with tree backend
-  searchable_tree_bag tb;
-  set s_ptr(&tb); // pointer constructor
+		sa.has(atoi(argv[i]));
+		sa.print();
+		sa.get_bag().print();
+		st.print();
+		sa.clear();
+		int arr[] = {1, 2, 3, 4};
+		sa.insert(arr, 4);
+		std::cout << std::endl;
+	}
 
-  int vals[7];
-  vals[0] = 5;
-  vals[1] = 3;
-  vals[2] = 7;
-  vals[3] = 5;
-  vals[4] = 3;
-  vals[5] = 8;
-  vals[6] = 7;
-  s_ptr.insert(vals, 7); // duplicates in batch should be filtered
-
-  print_bool_line("ptr_tree_has_3", s_ptr.has(3), true);
-  print_bool_line("ptr_tree_has_5", s_ptr.has(5), true);
-  print_bool_line("ptr_tree_has_7", s_ptr.has(7), true);
-  print_bool_line("ptr_tree_has_8", s_ptr.has(8), true);
-  print_bool_line("ptr_tree_has_9", s_ptr.has(9), false);
-
-  std::cout << "ptr_tree_print (no duplicates expected):" << std::endl;
-  s_ptr.print();
-
-  s_ptr.clear();
-  print_bool_line("ptr_tree_after_clear_has_5", s_ptr.has(5), false);
-
-  // --- 3) Default-constructed set with NULL backend (defensive behavior)
-  set s_null;        // bag_ == NULL
-  s_null.insert(42); // should be a no-op, not crash
-  print_bool_line("null_backend_has_42", s_null.has(42), false);
-  s_null.clear(); // no-op
-  std::cout << "null_backend_print (should print nothing):" << std::endl;
-  s_null.print();
-
-  return 0;
+	return (0);
 }
